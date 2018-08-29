@@ -1,0 +1,13 @@
+package br.com.spring.io.hateoas.spring_hateoas;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}
