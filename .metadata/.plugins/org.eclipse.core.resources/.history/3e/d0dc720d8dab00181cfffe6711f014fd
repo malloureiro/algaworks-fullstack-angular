@@ -1,5 +1,0 @@
-package br.com.spring.io.hateoas.spring_hateoas;
-
-public class Greeting {
-
-}
