@@ -3,6 +3,8 @@
 
 ### Eclipse ###
 
+/RemoteSystemsTempFiles
+
 .metadata
 bin/
 tmp/
