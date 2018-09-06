@@ -1,25 +1,13 @@
 package com.algaworks.algamoneyapi.exceptionhandler;
 
-import org.springframework.http.HttpStatus;
-
 public class ApiError {
 
-	private HttpStatus status;
 	private String mensagem;
 	private String erro;
 
-	public ApiError(HttpStatus status, String mensagem, String erro) {
-		this.status = status;
+	public ApiError(String mensagem, String erro) {
 		this.mensagem = mensagem;
 		this.erro = erro;
-	}
-
-	public HttpStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(HttpStatus status) {
-		this.status = status;
 	}
 
 	public String getMensagem() {
@@ -37,5 +25,5 @@ public class ApiError {
 	public void setErro(String erro) {
 		this.erro = erro;
 	}
-	
+
 }
