@@ -1,0 +1,31 @@
+﻿Interessante: construção de um projeto WEB com Spring + Thymeleaf (construção de páginas HTML) **pesquisar sobre
+
+
+Artigos sobre Java
+https://www.javacodegeeks.com
+https://www.journaldev.com
+https://www.baeldung.com/
+http://blog.caelum.com.br/arquitetura-de-microservicos-ou-monolitica/
+http://blog.caelum.com.br/autenticacao-rest-oauth2-em-java-com-apache-oltu/
+
+
+@RestController x @Controller
+https://dzone.com/articles/spring-framework-restcontroller-vs-controller
+
+Capítulo 2.2: discussões em comentários.
+
+Utilizar UUIDS nas URLs para identificar um recurso de forma "criptografada", de modo que na leitura da URL não seja possível identificar imediatamente os IDs dos recursos.
+
+Exemplo: https://mysystem.com/lancamentos/15
+Onde 15 é o ID do recurso a ser acessado.
+
+Links úteis:
+http://www.baeldung.com/java-uuid
+https://www.journaldev.com/17182/java-uuid-generator-java-guid
+Exemplos de utilização de UUIDs como primary key: https://medium.com/@jdedek/using-uuids-as-primary-keys-ca1fb409bb7c
+Como utilizar o Hibernate para gerar UUIDs como chave primária: https://www.thoughts-on-java.org/generate-uuids-primary-keys-hibernate/
+Exemplo completo de uma API RESTful usando Spring e com esta implementaçã odas chaves primárias como UUIDs: https://xenoterracide.com/post/using-spring-to-create-a-full-rest-api-in-less-than-60-lines-of-code/
+
+Capítulo 2.7: HATEOAS
+
+https://spring.io/guides/gs/rest-hateoas/
