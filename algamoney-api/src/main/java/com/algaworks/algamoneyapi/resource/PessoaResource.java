@@ -1,6 +1,5 @@
 package com.algaworks.algamoneyapi.resource;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.algaworks.algamoneyapi.helper.RecursoCriadoHelper;
 import com.algaworks.algamoneyapi.model.Pessoa;
 import com.algaworks.algamoneyapi.repository.PessoaRepository;
 
@@ -25,6 +24,10 @@ public class PessoaResource {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	/*@Autowired
+	private ApplicationEventPublisher eventPublisher;
+	*/
 	
 	@GetMapping
 	public ResponseEntity<List<Pessoa>> listar() {
@@ -49,13 +52,12 @@ public class PessoaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Pessoa> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
+	public ResponseEntity<?> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa novaPessoa = pessoaRepository.save(pessoa);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(novaPessoa.getCodigo()).toUri();
-		response.setHeader("Location", uri.toASCIIString());
+		//eventPublisher.publishEvent(new RecursoCriadoEvent(this, novaPessoa.getCodigo(), response));
 		
-		return ResponseEntity.ok(novaPessoa);
+		return new RecursoCriadoHelper().resourceCreate(novaPessoa.getCodigo(), novaPessoa);
 	}
 
 }
