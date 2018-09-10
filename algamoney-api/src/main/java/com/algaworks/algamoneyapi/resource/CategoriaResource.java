@@ -35,16 +35,6 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping
-	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
-		Categoria novaCategoria = categoriaRepository.save(categoria);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(novaCategoria.getCodigo()).toUri();
-		response.setHeader("Location", uri.toASCIIString());
-		
-		return ResponseEntity.created(uri).body(novaCategoria);
-	}
-	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable Long codigo) {
 		Categoria categoria = categoriaRepository.findOne(codigo);
@@ -53,4 +43,16 @@ public class CategoriaResource {
 		}
 		return ResponseEntity.notFound().build();
 	}
+	
+	@PostMapping
+	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
+		Categoria novaCategoria = categoriaRepository.save(categoria);
+		
+		// Setando header Location
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(novaCategoria.getCodigo()).toUri();
+		response.setHeader("Location", uri.toASCIIString());
+		
+		return ResponseEntity.created(uri).body(novaCategoria);
+	}
+	
 }
