@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -45,6 +47,16 @@ public class AlgamoneyApiExceptionHandler extends ResponseEntityExceptionHandler
 		}
 		
 		return new ResponseEntity<Object>(erros, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler({ EmptyResultDataAccessException.class })
+	//@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<?> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
+		String mensagemAlerta = messageSource.getMessage("recurso.nao.encontrado", null, null);
+		String erro = ex.getCause() == null ? ex.toString() : ex.getCause().toString();
+		
+		List<ApiError> apiErro = Arrays.asList(new ApiError(mensagemAlerta, erro));
+		return new ResponseEntity<Object>(apiErro, HttpStatus.NOT_FOUND);
 	}
 }
 
