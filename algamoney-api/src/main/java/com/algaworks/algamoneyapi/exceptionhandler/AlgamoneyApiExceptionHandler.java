@@ -29,7 +29,7 @@ public class AlgamoneyApiExceptionHandler extends ResponseEntityExceptionHandler
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
 		String mensagemAlerta = messageSource.getMessage("requisicao.invalida", null, null);
-		String erro = ex.getCause().toString();
+		String erro = ex.getCause() == null ? ex.toString() : ex.getCause().toString();
 
 		ApiError apiErro = new ApiError(mensagemAlerta, erro);
 		return new ResponseEntity<Object>(Arrays.asList(apiErro), HttpStatus.BAD_REQUEST);
@@ -58,5 +58,6 @@ public class AlgamoneyApiExceptionHandler extends ResponseEntityExceptionHandler
 		List<ApiError> apiErro = Arrays.asList(new ApiError(mensagemAlerta, erro));
 		return new ResponseEntity<Object>(apiErro, HttpStatus.NOT_FOUND);
 	}
+	
 }
 
