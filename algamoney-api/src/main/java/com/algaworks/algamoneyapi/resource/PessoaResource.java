@@ -37,7 +37,7 @@ public class PessoaResource {
 	private ApplicationEventPublisher eventPublisher;
 	*/
 	
-	@GetMapping
+	@GetMapping(produces="application/json")
 	public ResponseEntity<List<Pessoa>> listar() {
 		List<Pessoa> pessoas = pessoaRepository.findAll();
 		
@@ -48,7 +48,7 @@ public class PessoaResource {
 		return ResponseEntity.ok(pessoas);
 	}
 	
-	@GetMapping("/{codigo}")
+	@GetMapping(path="/{codigo}", produces="application/json")
 	public ResponseEntity<Pessoa> listarPorCodigo(@PathVariable Long codigo) {
 		Pessoa pessoa = pessoaRepository.findOne(codigo);
 		
@@ -59,7 +59,7 @@ public class PessoaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping
+	@PostMapping(produces="application/json")
 	public ResponseEntity<?> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa novaPessoa = pessoaRepository.save(pessoa);
 		
@@ -67,19 +67,19 @@ public class PessoaResource {
 		return new RecursoCriadoHelper().resourceCreate(novaPessoa.getCodigo(), novaPessoa);
 	}
 	
-	@DeleteMapping("/{codigo}")
+	@DeleteMapping(path="/{codigo}", produces="application/json")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		pessoaRepository.delete(codigo);
 	}
 	
-	@PutMapping("/{codigo}")
+	@PutMapping(path="/{codigo}", produces="application/json")
 	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
 		Pessoa pessoaExistente = pessoaService.atualizar(codigo, pessoa);
 		return ResponseEntity.ok(pessoaExistente);
 	}
 	
-	@PutMapping("/{codigo}/ativo")
+	@PutMapping(path="/{codigo}/ativo", produces="application/json")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
 		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);

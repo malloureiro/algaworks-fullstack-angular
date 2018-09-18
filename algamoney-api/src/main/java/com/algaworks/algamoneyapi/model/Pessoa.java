@@ -9,22 +9,28 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Pessoa {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(position=1, value="${pessoa.codigo.docs.descricao}")
 	private Long codigo;
 	
 	@NotNull
 	@Size(min=3, max=80)
+	@ApiModelProperty(position=2, value="${pessoa.nome.docs.descricao}")
 	private String nome;
 	
 	@Embedded
 	@Valid
+	@ApiModelProperty(position=3, value="${pessoa.endereco.docs.descricao}")
 	private Endereco endereco;
 	
 	@NotNull
+	@ApiModelProperty(position=4, value="${pessoa.ativo.docs.descricao}")
 	private Boolean ativo;
 
 	public Long getCodigo() {

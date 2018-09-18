@@ -1,4 +1,6 @@
-﻿Interessante: construção de um projeto WEB com Spring + Thymeleaf (construção de páginas HTML) **pesquisar sobre
+﻿https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/
+
+Interessante: construção de um projeto WEB com Spring + Thymeleaf (construção de páginas HTML) **pesquisar sobre
 
 
 Artigos sobre Java
