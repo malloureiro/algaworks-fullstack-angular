@@ -8,4 +8,6 @@ public interface PessoaService {
 
 	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo);
 	
+	public Pessoa buscarPessoaPorCodigo(Long codigo);
+	
 }

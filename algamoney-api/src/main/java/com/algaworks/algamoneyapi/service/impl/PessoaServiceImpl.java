@@ -29,7 +29,7 @@ public class PessoaServiceImpl implements PessoaService {
 		pessoaRepository.save(pessoaExistente);
 	}
 	
-	private Pessoa buscarPessoaPorCodigo(Long codigo) {
+	public Pessoa buscarPessoaPorCodigo(Long codigo) {
 		Pessoa pessoaExistente = pessoaRepository.findOne(codigo);
 		if (pessoaExistente == null) {
 			throw new EmptyResultDataAccessException(1);

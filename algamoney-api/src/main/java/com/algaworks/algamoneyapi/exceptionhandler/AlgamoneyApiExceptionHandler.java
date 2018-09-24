@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,13 +53,39 @@ public class AlgamoneyApiExceptionHandler extends ResponseEntityExceptionHandler
 	}
 	
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
-	//@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ResponseEntity<?> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 		String mensagemAlerta = messageSource.getMessage("recurso.nao.encontrado", null, null);
 		String erro = ex.getCause() == null ? ex.toString() : ex.getCause().toString();
 		
 		List<ApiError> apiErro = Arrays.asList(new ApiError(mensagemAlerta, erro));
 		return new ResponseEntity<Object>(apiErro, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler({DataIntegrityViolationException.class})
+	public ResponseEntity<?> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+		String mensagemAlerta = messageSource.getMessage("recurso.operacao.nao.permitida", null, null);
+		String erro = ExceptionUtils.getRootCauseMessage(ex);
+		
+		List<ApiError> apiErro = Arrays.asList(new ApiError(mensagemAlerta, erro));
+		return new ResponseEntity<Object>(apiErro, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler({InvalidDataAccessApiUsageException.class})
+	public ResponseEntity<?> handleInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException ex, WebRequest request) {
+		String mensagemAlerta = messageSource.getMessage("recurso.operacao.sem.referencia", null, null);
+		String erro = ExceptionUtils.getRootCauseMessage(ex);
+		
+		List<ApiError> apiErro = Arrays.asList(new ApiError(mensagemAlerta, erro));
+		return new ResponseEntity<Object>(apiErro, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler({PessoaInativaException.class})
+	public ResponseEntity<?> handlePessoaInativaException(PessoaInativaException ex, WebRequest request) {
+		String mensagemAlerta = messageSource.getMessage("recurso.encontrado.inativo", null, null);
+		String erro = ExceptionUtils.getRootCauseMessage(ex);
+		
+		List<ApiError> apiErro = Arrays.asList(new ApiError(mensagemAlerta, erro));
+		return new ResponseEntity<Object>(apiErro, HttpStatus.BAD_REQUEST);
 	}
 	
 }
