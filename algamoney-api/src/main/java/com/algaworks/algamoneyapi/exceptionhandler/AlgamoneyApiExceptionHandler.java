@@ -118,8 +118,8 @@ public class AlgamoneyApiExceptionHandler extends ResponseEntityExceptionHandler
 	 * @param request
 	 * @return
 	 */
-	@ExceptionHandler({PessoaInativaException.class})
-	public ResponseEntity<?> handlePessoaInativaException(PessoaInativaException ex, WebRequest request) {
+	@ExceptionHandler({PessoaInativaOuInexistenteException.class})
+	public ResponseEntity<?> handlePessoaInativaException(PessoaInativaOuInexistenteException ex, WebRequest request) {
 		String mensagemAlerta = messageSource.getMessage("recurso.encontrado.inativo", null, null);
 		String erro = ExceptionUtils.getRootCauseMessage(ex);
 		

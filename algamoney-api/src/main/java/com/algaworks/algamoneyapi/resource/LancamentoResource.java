@@ -61,10 +61,9 @@ public class LancamentoResource {
 	@PostMapping
 	public ResponseEntity<Lancamento> salvar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
 		
-		boolean pessoaAtiva = lancamentoService.verificarPessoaAtiva(lancamento);
+		Lancamento lancamentoSalvo = lancamentoService.salvarLancamento(lancamento);
 		
-		if (pessoaAtiva) {
-			Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
+		if (lancamentoSalvo != null) {
 			eventPubliser.publishEvent(new RecursoCriadoEvent(lancamentoSalvo, lancamentoSalvo.getCodigo(), response));
 			return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
 		}

@@ -60,10 +60,9 @@ public class PessoaResource {
 	}
 	
 	@PostMapping(produces="application/json")
-	public ResponseEntity<?> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
+	public ResponseEntity<Object> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa novaPessoa = pessoaRepository.save(pessoa);
 		
-		//eventPublisher.publishEvent(new RecursoCriadoEvent(this, novaPessoa.getCodigo(), response));
 		return new RecursoCriadoHelper().resourceCreate(novaPessoa.getCodigo(), novaPessoa);
 	}
 	
