@@ -10,7 +10,7 @@ public interface PessoaService {
 	
 	public Pessoa atualizar(Long codigo, Pessoa pessoa);
 
-	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo);
+	public Pessoa atualizarPropriedadeAtivo(Long codigo, Boolean ativo);
 	
 	public Pessoa buscarPessoaPorCodigo(Long codigo);
 	

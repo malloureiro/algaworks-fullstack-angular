@@ -31,10 +31,10 @@ public class PessoaServiceImpl implements PessoaService {
 	}
 
 	@Override
-	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+	public Pessoa atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
 		Pessoa pessoaExistente = buscarPessoaPorCodigo(codigo);
 		pessoaExistente.setAtivo(ativo);
-		pessoaRepository.save(pessoaExistente);
+		return pessoaRepository.save(pessoaExistente);
 	}
 	
 	@Override
