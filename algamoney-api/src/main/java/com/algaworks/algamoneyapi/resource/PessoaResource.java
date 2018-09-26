@@ -20,15 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algamoneyapi.helper.RecursoCriadoHelper;
 import com.algaworks.algamoneyapi.model.Pessoa;
-import com.algaworks.algamoneyapi.repository.PessoaRepository;
 import com.algaworks.algamoneyapi.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaResource {
-	
-	@Autowired
-	private PessoaRepository pessoaRepository;
 	
 	@Autowired
 	private PessoaService pessoaService;
@@ -39,7 +35,7 @@ public class PessoaResource {
 	
 	@GetMapping(produces="application/json")
 	public ResponseEntity<List<Pessoa>> listar() {
-		List<Pessoa> pessoas = pessoaRepository.findAll();
+		List<Pessoa> pessoas = pessoaService.buscarTodos();
 		
 		if (pessoas.isEmpty()) {
 			return ResponseEntity.noContent().build();
@@ -50,7 +46,7 @@ public class PessoaResource {
 	
 	@GetMapping(path="/{codigo}", produces="application/json")
 	public ResponseEntity<Pessoa> listarPorCodigo(@PathVariable Long codigo) {
-		Pessoa pessoa = pessoaRepository.findOne(codigo);
+		Pessoa pessoa = pessoaService.buscarPessoaPorCodigo(codigo);
 		
 		if (pessoa != null) {
 			return ResponseEntity.ok(pessoa);
@@ -61,7 +57,7 @@ public class PessoaResource {
 	
 	@PostMapping(produces="application/json")
 	public ResponseEntity<Object> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
-		Pessoa novaPessoa = pessoaRepository.save(pessoa);
+		Pessoa novaPessoa = pessoaService.salvar(pessoa);
 		
 		return new RecursoCriadoHelper().resourceCreate(novaPessoa.getCodigo(), novaPessoa);
 	}
@@ -69,7 +65,7 @@ public class PessoaResource {
 	@DeleteMapping(path="/{codigo}", produces="application/json")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		pessoaRepository.delete(codigo);
+		pessoaService.remover(codigo);
 	}
 	
 	@PutMapping(path="/{codigo}", produces="application/json")
