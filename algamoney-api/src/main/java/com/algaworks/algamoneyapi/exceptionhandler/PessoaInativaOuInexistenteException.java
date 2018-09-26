@@ -1,6 +1,6 @@
 package com.algaworks.algamoneyapi.exceptionhandler;
 
-public class PessoaInativaException extends RuntimeException {
+public class PessoaInativaOuInexistenteException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

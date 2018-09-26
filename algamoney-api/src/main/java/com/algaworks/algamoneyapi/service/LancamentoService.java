@@ -4,6 +4,6 @@ import com.algaworks.algamoneyapi.model.Lancamento;
 
 public interface LancamentoService {
 	
-	public boolean verificarPessoaAtiva(Lancamento lancamento);
+	public Lancamento salvarLancamento(Lancamento lancamento);
 
 }
