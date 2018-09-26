@@ -1,4 +1,4 @@
-package com.algaworks.algamoneyapi.resource;
+package com.algaworks.algamoneyapi.controller;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import com.algaworks.algamoneyapi.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoas")
-public class PessoaResource {
+public class PessoaController {
 	
 	@Autowired
 	private PessoaService pessoaService;

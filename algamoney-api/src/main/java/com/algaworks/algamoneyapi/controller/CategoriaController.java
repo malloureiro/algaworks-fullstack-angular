@@ -1,4 +1,4 @@
-package com.algaworks.algamoneyapi.resource;
+package com.algaworks.algamoneyapi.controller;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import com.algaworks.algamoneyapi.repository.CategoriaRepository;
 
 @RestController
 @RequestMapping("/categorias")
-public class CategoriaResource {
+public class CategoriaController {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;

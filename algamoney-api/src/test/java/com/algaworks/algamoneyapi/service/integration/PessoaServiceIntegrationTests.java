@@ -1,4 +1,4 @@
-package com.algaworks.algamoneyapi.service;
+package com.algaworks.algamoneyapi.service.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.algaworks.algamoneyapi.model.Pessoa;
+import com.algaworks.algamoneyapi.service.PessoaService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.NONE)
+@ActiveProfiles("test")
 public class PessoaServiceIntegrationTests {
 
 	@Autowired
@@ -27,7 +30,7 @@ public class PessoaServiceIntegrationTests {
 	private Pessoa pessoaSalva;
 	
 	@Before
-	public void init() {
+	public void setup() {
 		aPessoa = new Pessoa();
 		aPessoa.setNome("Teste Integração Pessoa");
 		aPessoa.setAtivo(true);
@@ -54,20 +57,18 @@ public class PessoaServiceIntegrationTests {
 		assertEquals(pessoaSalva.getNome(), pessoaAtualizada.getNome());
 	}
 	
-	//@Test
+	@Test
 	public void testAtivarInativarPessoa() {
 		
 		boolean ativo = false;
 		
-		pessoaService.atualizarPropriedadeAtivo(pessoaSalva.getCodigo(), ativo);
-		assertEquals(pessoaSalva.getAtivo(), ativo);
+		Pessoa pessoaInativa = pessoaService.atualizarPropriedadeAtivo(pessoaSalva.getCodigo(), ativo);
+		assertEquals(pessoaInativa.getAtivo(), ativo);
 		
 		ativo = true;
 		
-		pessoaService.atualizarPropriedadeAtivo(pessoaSalva.getCodigo(), ativo);
-		assertEquals(pessoaSalva.getAtivo(), ativo);
-		
-		// considerar o retorno do objeto de pessoa atualizada apenas para garantir a assertividade do teste faz sentido?
+		Pessoa pessoaAtiva = pessoaService.atualizarPropriedadeAtivo(pessoaSalva.getCodigo(), ativo);
+		assertEquals(pessoaAtiva.getAtivo(), ativo);
 	}
 	
 	@Test

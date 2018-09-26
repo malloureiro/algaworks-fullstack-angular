@@ -1,4 +1,4 @@
-package com.algaworks.algamoneyapi.resource;
+package com.algaworks.algamoneyapi.controller;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import com.algaworks.algamoneyapi.service.LancamentoService;
 
 @RestController
 @RequestMapping("/lancamentos")
-public class LancamentoResource {
+public class LancamentoController {
 	
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
