@@ -1,4 +1,6 @@
-﻿https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/
+﻿https://dzone.com/articles/unit-and-integration-tests-in-spring-boot-2
+
+https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/
 
 Interessante: construção de um projeto WEB com Spring + Thymeleaf (construção de páginas HTML) **pesquisar sobre
 
