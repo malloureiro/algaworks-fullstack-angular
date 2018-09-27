@@ -20,6 +20,3 @@ VALUES ('Maria Aparecida Santana', true, 'Av Pereira da Silva', 'B76', 'Fundos',
 
 INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) 
 VALUES ('Carlos Alberto de Souza', true, 'R Pagliato Neto', '1123', '', 'Centro', '19090-010', 'Sorocaba', 'São Paulo');
-
-INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) 
-VALUES ('Mariana Loureiro', true, 'Moreira Cesar', '1123', '', 'Centro', '19090-010', 'Sorocaba', 'São Paulo');
