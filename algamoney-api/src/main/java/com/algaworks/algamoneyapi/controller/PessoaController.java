@@ -33,18 +33,18 @@ public class PessoaController {
 	private ApplicationEventPublisher eventPublisher;
 	*/
 	
-	@GetMapping(produces="application/json")
+	@GetMapping
 	public ResponseEntity<List<Pessoa>> listar() {
 		List<Pessoa> pessoas = pessoaService.buscarTodos();
 		
 		if (pessoas.isEmpty()) {
-			return ResponseEntity.noContent().build();
+			return ResponseEntity.notFound().build();
 		}
 		
 		return ResponseEntity.ok(pessoas);
 	}
 	
-	@GetMapping(path="/{codigo}", produces="application/json")
+	@GetMapping(path="/{codigo}")
 	public ResponseEntity<Pessoa> listarPorCodigo(@PathVariable Long codigo) {
 		Pessoa pessoa = pessoaService.buscarPessoaPorCodigo(codigo);
 		
@@ -52,29 +52,29 @@ public class PessoaController {
 			return ResponseEntity.ok(pessoa);
 		}
 		
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping(produces="application/json")
+	@PostMapping
 	public ResponseEntity<Object> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa novaPessoa = pessoaService.salvar(pessoa);
 		
 		return new RecursoCriadoHelper().resourceCreate(novaPessoa.getCodigo(), novaPessoa);
 	}
 	
-	@DeleteMapping(path="/{codigo}", produces="application/json")
+	@DeleteMapping(path="/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		pessoaService.remover(codigo);
 	}
 	
-	@PutMapping(path="/{codigo}", produces="application/json")
+	@PutMapping(path="/{codigo}")
 	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
 		Pessoa pessoaExistente = pessoaService.atualizar(codigo, pessoa);
 		return ResponseEntity.ok(pessoaExistente);
 	}
 	
-	@PutMapping(path="/{codigo}/ativo", produces="application/json")
+	@PutMapping(path="/{codigo}/ativo")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
 		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);

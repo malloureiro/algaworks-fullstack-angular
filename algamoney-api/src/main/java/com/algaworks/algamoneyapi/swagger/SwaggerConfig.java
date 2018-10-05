@@ -2,7 +2,10 @@ package com.algaworks.algamoneyapi.swagger;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,15 +29,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @PropertySource("classpath:swagger-docs.properties")
 public class SwaggerConfig {
 	
+	/*
+	 *  Check documentation at /swagger-ui.html
+	 */
+	
+	private static final Set<String> DEFAULT_CONTENT_TYPE = new HashSet<>(Arrays.asList("application/json", "application/xml"));
+	
 	@Bean
 	public Docket allApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("algamoney-api/all")
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.algaworks.algamoneyapi"))
 				.paths(PathSelectors.any())
 				.build()
-				.apiInfo(apiInfo());
+				.apiInfo(apiInfo())
+				.produces(DEFAULT_CONTENT_TYPE)
+				.consumes(DEFAULT_CONTENT_TYPE);
 	}
 	
 	@Bean
@@ -45,7 +55,9 @@ public class SwaggerConfig {
 				.apis(RequestHandlerSelectors.basePackage("com.algaworks.algamoneyapi"))
 				.paths(pessoaPath())
 				.build()
-				.apiInfo(apiInfo());
+				.apiInfo(apiInfo())
+				.produces(DEFAULT_CONTENT_TYPE)
+				.consumes(DEFAULT_CONTENT_TYPE);
 	}
 	
 	private ApiInfo apiInfo() {
