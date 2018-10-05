@@ -20,6 +20,7 @@ import com.algaworks.algamoneyapi.service.PessoaService;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.NONE)
 @ActiveProfiles("test")
+//@TestPropertySource(locations="classpath:application-test.properties")
 public class PessoaServiceIntegrationTests {
 
 	@Autowired
