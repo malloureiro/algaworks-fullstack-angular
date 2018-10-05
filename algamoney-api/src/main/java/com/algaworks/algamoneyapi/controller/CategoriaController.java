@@ -36,7 +36,7 @@ public class CategoriaController {
 		if (!categorias.isEmpty()) {
 			return ResponseEntity.ok(categorias);
 		}
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.notFound().build();
 	}
 	
 	@GetMapping("/{codigo}")

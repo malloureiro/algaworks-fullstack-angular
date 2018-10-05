@@ -42,7 +42,7 @@ public class LancamentoController {
 			return ResponseEntity.ok(lancamentos);
 		}
 		
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.notFound().build();
 	}
 	
 	
@@ -55,7 +55,7 @@ public class LancamentoController {
 			return ResponseEntity.ok(lancamento );
 		}
 		
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
